@@ -10,11 +10,11 @@ local config = {}
 local function setup(opts)
   if not opts.path then return print('You must set path') end
   config.path = Path:new(opts.path)
-  config.key = opts.key or '<cr>'
+  config.link_key_mapping = opts.link_key_mapping or '<cr>'
   vim.cmd('augroup SimpleWikiAutogroup')
   vim.cmd('autocmd!')
-  vim.cmd(('au BufEnter %s/*.md nnoremap <buffer> %s :lua require"simple-wiki".open_or_create()<cr>'):format(config.path:expand(), config.key))
-  vim.cmd(('au BufEnter %s/*.md vnoremap <buffer> %s :<c-u>lua require"simple-wiki".create_link(true)<cr>'):format(config.path:expand(), config.key))
+  vim.cmd(('au BufEnter %s/*.md nnoremap <buffer> %s :lua require"simple-wiki".open_or_create()<cr>'):format(config.path:expand(), config.link_key_mapping))
+  vim.cmd(('au BufEnter %s/*.md vnoremap <buffer> %s :<c-u>lua require"simple-wiki".create_link(true)<cr>'):format(config.path:expand(), config.link_key_mapping))
   vim.cmd('augroup END')
 end
 
